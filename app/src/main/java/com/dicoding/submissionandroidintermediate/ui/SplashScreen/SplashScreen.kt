@@ -1,12 +1,33 @@
 package com.dicoding.submissionandroidintermediate.ui.SplashScreen
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import com.dicoding.submissionandroidintermediate.R
+import com.dicoding.submissionandroidintermediate.databinding.ActivitySplashScreenBinding
+import com.dicoding.submissionandroidintermediate.ui.MainActivity
 
 class SplashScreen : AppCompatActivity() {
+
+    private lateinit var binding: ActivitySplashScreenBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                val intent = Intent(this@SplashScreen, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }, DELAY_MILIS
+        )
+    }
+
+    companion object{
+        const val DELAY_MILIS = 500L
     }
 }

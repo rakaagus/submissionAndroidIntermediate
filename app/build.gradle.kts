@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.dicoding.submissionandroidintermediate"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.dicoding.submissionandroidintermediate"
@@ -72,6 +72,10 @@ dependencies {
     implementation("androidx.camera:camera-camera2:$cameraxVersion")
     implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
     implementation("androidx.camera:camera-view:$cameraxVersion")
+
+    // navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.1")
 
     // testing
     testImplementation("junit:junit:4.13.2")

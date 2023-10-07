@@ -3,7 +3,28 @@
     <style name="Base.Theme.SubmissionAndroidIntermediate" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="colorPrimary">@color/blue_patian_normal</item>
+        <item name="colorPrimaryVariant">@color/blue_patian_normal</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary Brand Color -->
+        <item name="colorSecondary">@color/blue_patian_normal</item>
+        <item name="colorSecondaryVariant">@color/white</item>
+        <item name="colorOnSecondary">@color/blue_patian_normal</item>
+
+        <item name="android:statusBarColor" tools:targetApi="1">?attr/colorOnPrimary</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.SubmissionAndroidIntermediate" parent="Base.Theme.SubmissionAndroidIntermediate" />
+
+    <style name="StyleFAB" parent="Widget.Design.FloatingActionButton">
+        <item name="shapeAppearanceOverlay">@style/FABStyleCircle</item>
+    </style>
+
+    <style name="FABStyleCircle" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
 </resources>
