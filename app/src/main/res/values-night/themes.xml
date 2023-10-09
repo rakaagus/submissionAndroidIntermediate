@@ -16,8 +16,22 @@
 
     <style name="Theme.SubmissionAndroidIntermediate" parent="Base.Theme.SubmissionAndroidIntermediate" />
 
-    <style name="shapeAppreaceOverlay.App.CornerSize50Percent" parent="">
-        <item name="cornerSize">100%</item>
-        <item name="colorOnSecondary">@color/white</item>
+    <style name="StyleFAB" parent="Widget.Design.FloatingActionButton">
+        <item name="shapeAppearanceOverlay">@style/FABStyleCircle</item>
+    </style>
+
+    <style name="FABStyleCircle" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="ShapeImageCircle" parent="" >
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="ButtonCirlce5Percen" parent="" >
+        <item name="cornerSize">5%</item>
+        <item name="cornerFamily">rounded</item>
     </style>
 </resources>

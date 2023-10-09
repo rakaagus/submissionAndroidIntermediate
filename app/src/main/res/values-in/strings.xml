@@ -6,4 +6,28 @@
     <string name="title_home">Home</string>
     <string name="title_profile">Profil</string>
     <string name="title_post">Post</string>
+
+    <!--Bottom Pop Up-->
+    <string name="bottom_title_post">Pilih postingan yang ingin Anda buat</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Gallery</string>
+
+    <!--onboarding & get started-->
+    <string name="sub_title_onboarding_one">Bagikan semua yang Anda inginkan</string>
+    <string name="title_onboarding_one">BAGIKAN CERITA ANDA TENTANG DICODING</string>
+    <string name="description_onboarding_one">Tunjukkan cerita, pengalaman, momen Anda di sini dengan bebas tanpa rasa khawatir dan tunjukkan kebahagiaan Anda lebih dalam di sini.</string>
+    <string name="text_skip">skip</string>
+    <string name="text_next">next</string>
+    <string name="sub_title_onboarding_two">Equipped with multi-language</string>
+    <string name="title_onboarding_two">No need to worry about language</string>
+    <string name="text_get_started_now">Get Started Now</string>
+    <string name="subtitle_get_started">it\'s time to start</string>
+    <string name="title_get_started_now">Let\'s explore your story now</string>
+
+    <!--Activity-->
+    <string name="text_name">Name</string>
+    <string name="text_email">Email</string>
+    <string name="text_setting">Settings</string>
+    <string name="text_logout">Logout</string>
+    <string name="text_language">language</string>
 </resources>

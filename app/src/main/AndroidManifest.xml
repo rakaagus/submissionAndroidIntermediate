@@ -13,18 +13,30 @@
         android:theme="@style/Theme.SubmissionAndroidIntermediate"
         tools:targetApi="31">
         <activity
-            android:name=".ui.MainActivity"
-            android:exported="true" />
+            android:name=".ui.Post.AddPostActivity"
+            android:exported="false" />
         <activity
-            android:name=".ui.SplashScreen.SplashScreen"
-            android:exported="true">
+            android:name=".ui.Onboarding.GetstartedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Onboarding.OnboardingActivity"
+            android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.SplashScreen.SplashScreen"
+            android:exported="true">
 
+        </activity>
     </application>
 
 </manifest>

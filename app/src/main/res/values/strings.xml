@@ -5,4 +5,28 @@
     <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
     <string name="title_post">Post</string>
+
+    <!--Bottom Pop Up-->
+    <string name="bottom_title_post">Choose what post you want to create</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+
+    <!--onboarding & get started-->
+    <string name="sub_title_onboarding_one">Share Everything you want</string>
+    <string name="title_onboarding_one">SHARE YOUR DICODING STORY</string>
+    <string name="description_onboarding_one">Show your stories, experiences, moments here freely without worrying and show your happiness more deeply here.</string>
+    <string name="text_skip">Skip</string>
+    <string name="text_next">Next</string>
+    <string name="sub_title_onboarding_two">Equipped with multi-language</string>
+    <string name="title_onboarding_two">No need to worry about language</string>
+    <string name="text_get_started_now">Get Started Now</string>
+    <string name="subtitle_get_started">it\'s time to start</string>
+    <string name="title_get_started_now">Let\'s explore your story now</string>
+
+    <!--Activity-->
+    <string name="text_name">Name</string>
+    <string name="text_email">Email</string>
+    <string name="text_setting">Settings</string>
+    <string name="text_logout">Logout</string>
+    <string name="text_language">language</string>
 </resources>

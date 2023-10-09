@@ -8,6 +8,7 @@ import android.os.Looper
 import com.dicoding.submissionandroidintermediate.R
 import com.dicoding.submissionandroidintermediate.databinding.ActivitySplashScreenBinding
 import com.dicoding.submissionandroidintermediate.ui.MainActivity
+import com.dicoding.submissionandroidintermediate.ui.Onboarding.OnboardingActivity
 
 class SplashScreen : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class SplashScreen : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed(
             {
-                val intent = Intent(this@SplashScreen, MainActivity::class.java)
+                val intent = Intent(this@SplashScreen, OnboardingActivity::class.java)
                 startActivity(intent)
                 finish()
             }, DELAY_MILIS
@@ -28,6 +29,6 @@ class SplashScreen : AppCompatActivity() {
     }
 
     companion object{
-        const val DELAY_MILIS = 500L
+        const val DELAY_MILIS = 1500L
     }
 }
