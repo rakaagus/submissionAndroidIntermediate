@@ -16,18 +16,31 @@
     <string name="sub_title_onboarding_one">Bagikan semua yang Anda inginkan</string>
     <string name="title_onboarding_one">BAGIKAN CERITA ANDA TENTANG DICODING</string>
     <string name="description_onboarding_one">Tunjukkan cerita, pengalaman, momen Anda di sini dengan bebas tanpa rasa khawatir dan tunjukkan kebahagiaan Anda lebih dalam di sini.</string>
-    <string name="text_skip">skip</string>
-    <string name="text_next">next</string>
-    <string name="sub_title_onboarding_two">Equipped with multi-language</string>
-    <string name="title_onboarding_two">No need to worry about language</string>
-    <string name="text_get_started_now">Get Started Now</string>
-    <string name="subtitle_get_started">it\'s time to start</string>
-    <string name="title_get_started_now">Let\'s explore your story now</string>
+    <string name="text_skip">lewati</string>
+    <string name="text_next">selanjutnya</string>
+    <string name="sub_title_onboarding_two">Dilengkapi dengan multi-bahasa</string>
+    <string name="title_onboarding_two">Tidak perlu khawatir mengenai bahasa</string>
+    <string name="text_get_started_now">Mulai Sekarang</string>
+    <string name="subtitle_get_started">saatnya untuk memulai</string>
+    <string name="title_get_started_now">Mari jelajahi kisah Anda sekarang</string>
 
     <!--Activity-->
-    <string name="text_name">Name</string>
+    <string name="text_name">Nama</string>
     <string name="text_email">Email</string>
-    <string name="text_setting">Settings</string>
-    <string name="text_logout">Logout</string>
-    <string name="text_language">language</string>
+    <string name="text_setting">Pengaturan</string>
+    <string name="text_logout">Keluar</string>
+    <string name="text_language">Bahasa</string>
+    <string name="text_sign_in">Masuk</string>
+    <string name="text_desc_login">Masukkan Email dan kata sandi yang valid untuk melanjutkan</string>
+    <string name="text_email_address">Masukan Email</string>
+    <string name="text_password">Password</string>
+    <string name="text_forgot_password">Lupa Password?</string>
+    <string name="text_login">Login</string>
+    <string name="text_havent_any_account">Tidak punya akun?</string>
+    <string name="text_desc_register">Buat Akun untuk melanjutkan</string>
+    <string name="text_sign_up">Daftar</string>
+    <string name="text_already_have_account">Sudah Punya Akun?</string>
+    <string name="text_register">Daftar</string>
+    <string name="text_your_name">Nama Anda</string>
+    <string name="text_upload">Unggah</string>
 </resources>

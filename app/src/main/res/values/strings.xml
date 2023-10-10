@@ -29,4 +29,17 @@
     <string name="text_setting">Settings</string>
     <string name="text_logout">Logout</string>
     <string name="text_language">language</string>
+    <string name="text_sign_in">Sign In</string>
+    <string name="text_desc_login">Enter Valid Email and password to continue</string>
+    <string name="text_email_address">Email Address</string>
+    <string name="text_password">Password</string>
+    <string name="text_forgot_password">Forgot password?</string>
+    <string name="text_login">Login</string>
+    <string name="text_havent_any_account">Haven’t any account?</string>
+    <string name="text_desc_register">Make Account for continue</string>
+    <string name="text_sign_up">Sign Up</string>
+    <string name="text_already_have_account">Already Have Account?</string>
+    <string name="text_register">Register</string>
+    <string name="text_your_name">Your Name</string>
+    <string name="text_upload">Upload</string>
 </resources>
