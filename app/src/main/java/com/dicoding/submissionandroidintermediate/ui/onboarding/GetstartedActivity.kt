@@ -1,4 +1,4 @@
-package com.dicoding.submissionandroidintermediate.ui.Onboarding
+package com.dicoding.submissionandroidintermediate.ui.onboarding
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import com.dicoding.submissionandroidintermediate.databinding.ActivityGetstartedBinding
-import com.dicoding.submissionandroidintermediate.ui.Auth.Login.LoginActivity
+import com.dicoding.submissionandroidintermediate.ui.auth.login.LoginActivity
 import com.dicoding.submissionandroidintermediate.ui.ViewModelFactory
 
 class GetstartedActivity : AppCompatActivity() {

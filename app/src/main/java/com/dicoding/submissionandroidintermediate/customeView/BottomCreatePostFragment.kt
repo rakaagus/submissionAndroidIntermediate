@@ -1,6 +1,5 @@
 package com.dicoding.submissionandroidintermediate.customeView
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.dicoding.submissionandroidintermediate.R
-import com.dicoding.submissionandroidintermediate.ui.Post.AddPostActivity
-import com.dicoding.submissionandroidintermediate.ui.SplashScreen.SplashScreen
+import com.dicoding.submissionandroidintermediate.ui.post.AddPostActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomCreatePostFragment: BottomSheetDialogFragment(), View.OnClickListener {

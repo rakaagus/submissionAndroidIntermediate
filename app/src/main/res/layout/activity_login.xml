@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.Auth.Login.LoginActivity">
+    tools:context=".ui.auth.login.LoginActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
@@ -107,7 +107,7 @@
         app:startIconDrawable="@drawable/ic_lock"
         android:hint="@string/text_password">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.dicoding.submissionandroidintermediate.customeView.PasswordEditCustom
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

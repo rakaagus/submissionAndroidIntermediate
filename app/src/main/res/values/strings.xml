@@ -42,4 +42,18 @@
     <string name="text_register">Register</string>
     <string name="text_your_name">Your Name</string>
     <string name="text_upload">Upload</string>
+    <string name="text_error_custome_edittext">Password cannot be less than 8 characters</string>
+    <string name="text_error_email">Please fill in your email!!</string>
+
+    <!--Text Dialog-->
+    <string name="text_desc_success_login">You have successfully logged in. Can\'t wait?</string>
+    <string name="text_title_success_login" translatable="false">Yeay</string>
+    <string name="text_button_success_login">Continue</string>
+
+    <string name="text_error_api">A Problem Happens %1$s</string>
+
+    <!--Text Logout-->
+    <string name="text_title_logout">Are you sure?</string>
+    <string name="text_desc_logout">Your Session data will be cleared, and you will need to log in again.</string>
+    <string name="text_button_cancle" translatable="false">Cancle</string>
 </resources>

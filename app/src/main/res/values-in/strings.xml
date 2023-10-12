@@ -43,4 +43,11 @@
     <string name="text_register">Daftar</string>
     <string name="text_your_name">Nama Anda</string>
     <string name="text_upload">Unggah</string>
+    <string name="text_error_custome_edittext">Password cannot be less than 8 characters</string>
+    <string name="text_error_email">Tolong isi email Anda!!!</string>
+    <string name="text_desc_success_login">Anda telah berhasil Login. Tidak sabar menunggu?</string>
+    <string name="text_button_success_login">Lanjut</string>
+    <string name="text_error_api">Terjadi Sebuah Masalah %1$s</string>
+    <string name="text_title_logout">Apakah Anda Yakin?</string>
+    <string name="text_desc_logout">Data Session kamu akan dihapus, dan kamu harus login kembali</string>
 </resources>

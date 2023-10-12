@@ -1,8 +1,7 @@
-package com.dicoding.submissionandroidintermediate.ui.Post
+package com.dicoding.submissionandroidintermediate.ui.post
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.dicoding.submissionandroidintermediate.R
 import com.dicoding.submissionandroidintermediate.databinding.ActivityAddPostBinding
 
 class AddPostActivity : AppCompatActivity() {

@@ -34,7 +34,11 @@
     </style>
 
     <style name="ButtonCirlce5Percen" parent="" >
-        <item name="cornerSize">5%</item>
+        <item name="cornerSize">20%</item>
         <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="CircleShape" parent="" >
+        <item name="cornerSize">5%</item>
     </style>
 </resources>

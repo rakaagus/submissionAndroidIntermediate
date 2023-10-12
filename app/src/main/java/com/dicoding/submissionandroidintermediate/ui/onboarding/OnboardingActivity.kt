@@ -1,9 +1,8 @@
-package com.dicoding.submissionandroidintermediate.ui.Onboarding
+package com.dicoding.submissionandroidintermediate.ui.onboarding
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.dicoding.submissionandroidintermediate.R
 import com.dicoding.submissionandroidintermediate.databinding.ActivityOnboardingBinding
 
 class OnboardingActivity : AppCompatActivity() {

@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.dicoding.submissionandroidintermediate.ui.Home.HomeFragment"
+        android:name="com.dicoding.submissionandroidintermediate.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.dicoding.submissionandroidintermediate.ui.Profile.ProfileFragment"
+        android:name="com.dicoding.submissionandroidintermediate.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
