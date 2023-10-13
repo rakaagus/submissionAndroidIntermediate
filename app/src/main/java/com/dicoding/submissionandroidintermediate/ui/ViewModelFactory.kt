@@ -7,8 +7,10 @@ import com.dicoding.submissionandroidintermediate.data.AppRepository
 import com.dicoding.submissionandroidintermediate.di.Injection
 import com.dicoding.submissionandroidintermediate.ui.auth.login.LoginViewModel
 import com.dicoding.submissionandroidintermediate.ui.auth.register.RegisterViewModel
+import com.dicoding.submissionandroidintermediate.ui.detail.DetailViewModel
 import com.dicoding.submissionandroidintermediate.ui.home.HomeViewModel
 import com.dicoding.submissionandroidintermediate.ui.onboarding.GetStartedViewModel
+import com.dicoding.submissionandroidintermediate.ui.post.AddPostViewModel
 import com.dicoding.submissionandroidintermediate.ui.profile.ProfileViewModel
 import com.dicoding.submissionandroidintermediate.ui.splashScreen.SplashScreenViewModel
 
@@ -29,6 +31,10 @@ class ViewModelFactory private constructor(
             return ProfileViewModel(appRepository) as T
         }else if(modelClass.isAssignableFrom(HomeViewModel::class.java)){
             return HomeViewModel(appRepository) as T
+        }else if(modelClass.isAssignableFrom(AddPostViewModel::class.java)){
+            return AddPostViewModel(appRepository) as T
+        }else if(modelClass.isAssignableFrom(DetailViewModel::class.java)){
+            return DetailViewModel(appRepository) as T
         }
         throw IllegalArgumentException("Unknow ViewModel Class"+ modelClass)
     }

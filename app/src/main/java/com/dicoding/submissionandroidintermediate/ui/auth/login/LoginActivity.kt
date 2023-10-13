@@ -78,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                     is Result.Error -> {
+                        dismissLoading()
                         Toast.makeText(
                             this@LoginActivity,
                             getString(R.string.text_error_api, result.error),

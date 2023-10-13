@@ -56,4 +56,11 @@
     <string name="text_title_logout">Are you sure?</string>
     <string name="text_desc_logout">Your Session data will be cleared, and you will need to log in again.</string>
     <string name="text_button_cancle" translatable="false">Cancle</string>
+    <string name="please_enter_your_story_description">Please enter your story description</string>
+    <string name="text_warn_back_story">Your Story data will be deleted</string>
+    <string name="empty_image_warning">Please input the image file and descriptor first.</string>
+
+    <string name="text_email_invalid">Your Email Invalid</string>
+    <string name="text_upload_success">story upload successful</string>
+    <string name="text_back">Back to %1$s</string>
 </resources>

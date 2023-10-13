@@ -16,16 +16,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
     
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/previewImageView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
         android:layout_marginTop="35dp"
+        app:shapeAppearanceOverlay="@style/CircleShape"
         android:layout_marginHorizontal="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_back"
-        app:srcCompat="@drawable/bg_image_camera" />
+        android:src="@drawable/bg_image_camera" />
 
     <EditText
         android:id="@+id/edt_description"
@@ -33,22 +34,20 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="20dp"
+        android:hint="@string/please_enter_your_story_description"
         app:layout_constraintTop_toBottomOf="@id/previewImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/btn_login"
+    <com.dicoding.submissionandroidintermediate.customeView.CustomButton
+        android:id="@+id/btn_upload"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/bg_button_blue"
         android:text="@string/text_upload"
         android:clickable="false"
-        android:alpha=".5"
-        android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

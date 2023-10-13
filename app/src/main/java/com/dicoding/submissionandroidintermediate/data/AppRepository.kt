@@ -101,7 +101,7 @@ class AppRepository(
         emitSource(localData)
     }
 
-    fun uploadStory(imageFile: File, description: String) = liveData {
+    fun uploadStory(token:String, imageFile: File, description: String) = liveData {
         emit(Result.Loading)
         val requestBody = description.toRequestBody("text/plain".toMediaType())
         val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
@@ -112,6 +112,7 @@ class AppRepository(
         )
         try {
             val successResponse = apiService.uploadStory(
+                setGenerateToken(token),
                 multipartBody,
                 requestBody
             )
@@ -124,16 +125,26 @@ class AppRepository(
     }
 
     fun getDetailStory(
+        token: String,
         id: String
     ): LiveData<Result<DetailStoryResponse>> = liveData {
         emit(Result.Loading)
         try {
-
+            val response = apiService.getDetailStory(
+                setGenerateToken(token),
+                id
+            )
+            val error = response.error
+            if(!error){
+                emit(Result.Success(response))
+            }else {
+                emit(Result.Error(response.message))
+            }
         }catch (e: Exception){
-
+            Log.d("AppRepository", "getDetailStory: ${e.message.toString()}")
+            emit(Result.Error(e.message.toString()))
         }
     }
-
 
     /*Logic For DataStore Preferences*/
     fun getSessionUser(): Flow<User> = prefAuth.getSessionUser()

@@ -82,6 +82,7 @@ class RegisterActivity : AppCompatActivity() {
                         }
                     }
                     is Result.Error -> {
+                        dismissLoading()
                         Toast.makeText(
                             this@RegisterActivity,
                             getString(R.string.text_error_api, result.error),

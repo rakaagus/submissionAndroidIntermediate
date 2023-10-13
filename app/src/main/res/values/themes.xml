@@ -28,17 +28,17 @@
         <item name="cornerFamily">rounded</item>
     </style>
 
-    <style name="ShapeImageCircle" parent="" >
+    <style name="ShapeImageCircle" parent="">
         <item name="cornerSize">50%</item>
         <item name="cornerFamily">rounded</item>
     </style>
 
-    <style name="ButtonCirlce5Percen" parent="" >
+    <style name="ButtonCirlce5Percen" parent="">
         <item name="cornerSize">20%</item>
         <item name="cornerFamily">rounded</item>
     </style>
 
-    <style name="CircleShape" parent="" >
+    <style name="CircleShape" parent="">
         <item name="cornerSize">5%</item>
     </style>
 </resources>

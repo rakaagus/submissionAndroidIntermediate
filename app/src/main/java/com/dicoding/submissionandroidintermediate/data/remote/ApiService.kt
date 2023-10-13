@@ -41,12 +41,14 @@ interface ApiService {
     @Multipart
     @POST("stories")
     suspend fun uploadStory(
+        @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody
     ): RegisterResponse
 
     @GET("stories/{id}")
     suspend fun getDetailStory(
+        @Header("Authorization") token: String,
         @Path("id") id: String
     ): DetailStoryResponse
 }

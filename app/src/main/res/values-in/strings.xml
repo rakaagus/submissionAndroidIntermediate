@@ -50,4 +50,11 @@
     <string name="text_error_api">Terjadi Sebuah Masalah %1$s</string>
     <string name="text_title_logout">Apakah Anda Yakin?</string>
     <string name="text_desc_logout">Data Session kamu akan dihapus, dan kamu harus login kembali</string>
+    <string name="please_enter_your_story_description">Tolong Masukan deskripsi story anda</string>
+    <string name="text_warn_back_story">Data Story Kamu akan di hapus</string>
+    <string name="empty_image_warning">Silakan masukkan berkas gambar dan descripsi terlebih dahulu.</string>
+
+    <string name="text_email_invalid">Email Anda Tidak Sesuai</string>
+    <string name="text_upload_success">Upload story berhasil</string>
+    <string name="text_back">Kembali ke %1$s</string>
 </resources>

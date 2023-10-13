@@ -1,13 +1,13 @@
 package com.dicoding.submissionandroidintermediate.ui.home
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.dicoding.submissionandroidintermediate.data.Result
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,6 +16,7 @@ import com.dicoding.submissionandroidintermediate.R
 import com.dicoding.submissionandroidintermediate.data.local.entity.StoryEntity
 import com.dicoding.submissionandroidintermediate.databinding.FragmentHomeBinding
 import com.dicoding.submissionandroidintermediate.ui.ViewModelFactory
+import com.dicoding.submissionandroidintermediate.ui.detail.DetailActivity
 import com.dicoding.submissionandroidintermediate.ui.home.adapter.StoryAdapter
 
 class HomeFragment : Fragment(), View.OnClickListener {
@@ -55,11 +56,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                         }
 
                         is Result.Error -> {
-                            Toast.makeText(
-                                requireActivity(),
-                                getString(R.string.text_error_api, result.error),
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            dismissLoading()
+                            Log.d("HomeFragment", "onViewCreated: ${result.error}")
                         }
                     }
                 }
@@ -84,7 +82,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setDataToDetailStory(data: StoryEntity) {
-
+        val intent = Intent(requireActivity(), DetailActivity::class.java)
+        intent.putExtra(DetailActivity.ID_STORY_KEY, data.id)
+        startActivity(intent)
     }
 
     private fun dismissLoading() {

@@ -82,7 +82,7 @@
         app:startIconDrawable="@drawable/ic_email"
         android:hint="@string/text_email_address">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.dicoding.submissionandroidintermediate.customeView.EmailEditCustom
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

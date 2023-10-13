@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.submissionandroidintermediate.data.local.entity.StoryEntity
 import com.dicoding.submissionandroidintermediate.databinding.ItemStoryBinding
+import com.dicoding.submissionandroidintermediate.utils.withDateFormat
 
 class StoryAdapter: ListAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
