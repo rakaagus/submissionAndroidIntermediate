@@ -75,9 +75,11 @@ class DetailActivity : AppCompatActivity() {
             .load(story.photoUrl)
             .centerCrop()
             .into(binding.ivImageStory)
-        binding.tvDate.text = story.createdAt
-        binding.tvDescription.text = story.description
-        binding.tvNameUser.text = story.name
+        binding.apply {
+            tvDate.text = story.createdAt
+            tvDescription.text = story.description
+            tvNameUser.text = story.name
+        }
     }
 
     private fun showLoading() {

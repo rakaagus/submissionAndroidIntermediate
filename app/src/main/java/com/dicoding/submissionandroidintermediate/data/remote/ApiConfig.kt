@@ -1,7 +1,6 @@
 package com.dicoding.submissionandroidintermediate.data.remote
 
 import com.dicoding.submissionandroidintermediate.BuildConfig
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,7 +10,7 @@ class ApiConfig() {
     companion object{
         private const val BASE_URL = BuildConfig.BASEURL
         fun getService(): ApiService{
-            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            val loggingInterceptor = if(BuildConfig.DEBUG) { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) } else {HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)}
             val client = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build()
