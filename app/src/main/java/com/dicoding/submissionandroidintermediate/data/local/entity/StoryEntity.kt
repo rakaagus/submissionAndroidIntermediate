@@ -1,8 +1,10 @@
 package com.dicoding.submissionandroidintermediate.data.local.entity
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "story")
 data class StoryEntity(
@@ -23,8 +25,8 @@ data class StoryEntity(
     var createdAt: String,
 
     @ColumnInfo(name = "lon")
-    var lon: String? = null,
+    var lon: Double?,
 
     @ColumnInfo(name = "lat")
-    var lat: String? = null
+    var lat: Double?
 )

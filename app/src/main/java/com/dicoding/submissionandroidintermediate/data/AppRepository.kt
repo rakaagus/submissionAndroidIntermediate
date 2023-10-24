@@ -4,9 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.dicoding.submissionandroidintermediate.data.local.entity.StoryEntity
 import com.dicoding.submissionandroidintermediate.data.local.entity.User
-import com.dicoding.submissionandroidintermediate.data.local.room.StoryDao
+import com.dicoding.submissionandroidintermediate.data.local.room.StoryDatabase
 import com.dicoding.submissionandroidintermediate.data.remote.ApiService
 import com.dicoding.submissionandroidintermediate.data.remote.response.DetailStoryResponse
 import com.dicoding.submissionandroidintermediate.data.remote.response.LoginResponse
@@ -22,9 +27,9 @@ import java.io.File
 
 class AppRepository(
     private val apiService: ApiService,
-    private val storyDao: StoryDao,
+    private val database: StoryDatabase,
     private val prefApp: AppPreferences,
-    private val prefAuth: AuthPreferences
+    private val prefAuth: AuthPreferences,
 ) {
 
     /*Logic Api*/
@@ -70,26 +75,47 @@ class AppRepository(
         }
     }
 
-    fun getAllStory(token: String): LiveData<Result<List<StoryEntity>>> = liveData {
+    fun getStoryWithPaging(token: String): LiveData<PagingData<StoryEntity>> {
+        @OptIn(ExperimentalPagingApi::class)
+        return Pager(
+            config = PagingConfig(
+                pageSize = 10
+            ),
+            remoteMediator = StoryRemoteMediator(
+                database = database,
+                apiService = apiService,
+                token = token
+            ),
+            pagingSourceFactory = {
+                database.storyDao().getAllStory()
+            }
+        ).liveData
+    }
+
+    fun getAllStoryWithLocation(token: String): LiveData<Result<List<StoryEntity>>> = liveData {
         emit(Result.Loading)
         try {
             val response = apiService.getAllStory(
-                setGenerateToken(token)
+                setGenerateToken(token),
+                size = 20,
+                location = 1
             )
             val error = response.error
             if(!error){
                 val listStory = response.listStory
                 val newStory = listStory.map {story->
                     StoryEntity(
-                        story.id,
-                        story.name,
-                        story.description,
-                        story.photoUrl,
-                        story.createdAt,
+                        id = story.id,
+                        name = story.name,
+                        description = story.description,
+                        photoUrl = story.photoUrl,
+                        createdAt = story.createdAt,
+                        lon = story.lon,
+                        lat = story.lat
                     )
                 }
-                storyDao.deleteStory()
-                storyDao.insertStory(newStory)
+                database.storyDao().deleteStory()
+                database.storyDao().insertStory(newStory)
             }else {
                 emit(Result.Error(response.message))
             }
@@ -97,7 +123,7 @@ class AppRepository(
             Log.d("AppRepository", "getAllStory: ${e.message.toString()}")
             emit(Result.Error(e.message.toString()))
         }
-        val localData: LiveData<Result<List<StoryEntity>>> = storyDao.getAllStory().map { Result.Success(it) }
+        val localData: LiveData<Result<List<StoryEntity>>> = database.storyDao().getStoryLocation().map { Result.Success(it) }
         emitSource(localData)
     }
 
@@ -165,13 +191,13 @@ class AppRepository(
         private var INSTANCE: AppRepository? = null
         fun getInstance(
             apiService: ApiService,
-            storyDao: StoryDao,
+            database: StoryDatabase,
             prefApp: AppPreferences,
             prefAuth: AuthPreferences
         ) : AppRepository = INSTANCE ?: synchronized(this){
             INSTANCE ?: AppRepository(
                 apiService,
-                storyDao,
+                database,
                 prefApp,
                 prefAuth
             )

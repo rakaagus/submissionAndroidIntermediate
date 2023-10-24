@@ -16,10 +16,6 @@ class AuthPreferences private constructor(private val authDataStore: DataStore<P
     private val userName = stringPreferencesKey(USER_NAME_KEY)
     private val userUid = stringPreferencesKey(UID_USER_KEY)
 
-    fun getUserToken(): Flow<String> = authDataStore.data.map { pref -> pref[userToken] ?: "" }
-    fun getUserName(): Flow<String> = authDataStore.data.map { pref -> pref[userName] ?: "" }
-    fun getUserUid(): Flow<String> = authDataStore.data.map { pref -> pref[userUid] ?: "" }
-
     fun getSessionUser(): Flow<User>{
         return authDataStore.data.map {pref->
             User(

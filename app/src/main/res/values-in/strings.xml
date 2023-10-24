@@ -5,6 +5,7 @@
     <!--Menu Strings-->
     <string name="title_home">Home</string>
     <string name="title_profile">Profil</string>
+    <string name="title_explore">Explore</string>
     <string name="title_post">Post</string>
 
     <!--Bottom Pop Up-->
@@ -57,4 +58,8 @@
     <string name="text_email_invalid">Email Anda Tidak Sesuai</string>
     <string name="text_upload_success">Upload story berhasil</string>
     <string name="text_back">Kembali ke %1$s</string>
+    <string name="MainActivity">MainActivity</string>
+    <string name="title_retry">retry</string>
+    <string name="text_timeout">Timeout</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

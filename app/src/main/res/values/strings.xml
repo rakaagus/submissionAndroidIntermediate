@@ -4,6 +4,7 @@
     <!--Menu Strings-->
     <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
+    <string name="title_explore">Explore</string>
     <string name="title_post">Post</string>
 
     <!--Bottom Pop Up-->
@@ -63,4 +64,8 @@
     <string name="text_email_invalid">Your Email Invalid</string>
     <string name="text_upload_success">story upload successful</string>
     <string name="text_back">Back to %1$s</string>
+    <string name="MainActivity">MainActivity</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_retry">retry</string>
+    <string name="text_timeout">Timeout</string>
 </resources>

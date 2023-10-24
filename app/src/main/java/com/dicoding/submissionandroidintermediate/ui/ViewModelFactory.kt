@@ -9,6 +9,7 @@ import com.dicoding.submissionandroidintermediate.ui.auth.login.LoginViewModel
 import com.dicoding.submissionandroidintermediate.ui.auth.register.RegisterViewModel
 import com.dicoding.submissionandroidintermediate.ui.detail.DetailViewModel
 import com.dicoding.submissionandroidintermediate.ui.home.HomeViewModel
+import com.dicoding.submissionandroidintermediate.ui.map.MapsActivityViewModel
 import com.dicoding.submissionandroidintermediate.ui.onboarding.GetStartedViewModel
 import com.dicoding.submissionandroidintermediate.ui.post.AddPostViewModel
 import com.dicoding.submissionandroidintermediate.ui.profile.ProfileViewModel
@@ -35,6 +36,8 @@ class ViewModelFactory private constructor(
             return AddPostViewModel(appRepository) as T
         }else if(modelClass.isAssignableFrom(DetailViewModel::class.java)){
             return DetailViewModel(appRepository) as T
+        }else if(modelClass.isAssignableFrom(MapsActivityViewModel::class.java)) {
+            return MapsActivityViewModel(appRepository) as T
         }
         throw IllegalArgumentException("Unknow ViewModel Class"+ modelClass)
     }

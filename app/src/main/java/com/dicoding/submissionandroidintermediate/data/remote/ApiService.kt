@@ -1,5 +1,6 @@
 package com.dicoding.submissionandroidintermediate.data.remote
 
+import com.dicoding.submissionandroidintermediate.data.local.entity.StoryEntity
 import com.dicoding.submissionandroidintermediate.data.remote.response.DetailStoryResponse
 import com.dicoding.submissionandroidintermediate.data.remote.response.LoginResponse
 import com.dicoding.submissionandroidintermediate.data.remote.response.RegisterResponse
@@ -14,6 +15,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     @FormUrlEncoded
@@ -33,7 +35,10 @@ interface ApiService {
 
     @GET("stories")
     suspend fun getAllStory(
-        @Header("Authorization") token: String
+        @Header("Authorization") token: String,
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null,
+        @Query("location") location: Int? = null
     ): StoryResponse
 
     @Multipart
