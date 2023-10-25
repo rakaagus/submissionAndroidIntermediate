@@ -11,14 +11,13 @@ import com.dicoding.submissionandroidintermediate.R
 import com.dicoding.submissionandroidintermediate.databinding.ActivityDetailBinding
 import com.dicoding.submissionandroidintermediate.ui.ViewModelFactory
 import com.dicoding.submissionandroidintermediate.data.Result
+import com.dicoding.submissionandroidintermediate.data.local.entity.StoryEntity
 import com.dicoding.submissionandroidintermediate.data.remote.response.DetailStoryResponse
+import com.dicoding.submissionandroidintermediate.utils.withDateFormat
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var loadingDetail: Dialog
-    private val detailViewModel by viewModels<DetailViewModel> {
-        ViewModelFactory.getInstance(application)
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -26,57 +25,25 @@ class DetailActivity : AppCompatActivity() {
 
         loadingDetail = Dialog(this)
 
-        val idStory = intent.getStringExtra(ID_STORY_KEY)
+        val story = intent.getParcelableExtra<StoryEntity>(ID_STORY_KEY)
+
+        if(story != null){
+            setupDetailStory(story)
+        }
 
         binding.ivBack.setOnClickListener {
             finish()
         }
-
-        detailViewModel.getTokenUser().observe(this){user->
-            detailViewModel.getDetail(user.token, idStory.toString()).observe(this){result->
-                if(result != null){
-                    when(result){
-                        is Result.Loading -> {
-                            showLoading()
-                        }
-                        is Result.Success -> {
-                            dismisLoading()
-                            setupDetailStory(result.data)
-                        }
-                        is Result.Error -> {
-                            dismisLoading()
-                            Log.d("DetailActivity", "onCreate: ${result.error}")
-                        }
-                    }
-                }
-            }
-        }
-
     }
 
-    private fun setupDetailStory(data: DetailStoryResponse) {
-        val story = data.story
-        if(story.id.isNotEmpty()){
-            binding.apply {
-                consAvatarName.visibility = View.VISIBLE
-                ivImageStory.visibility = View.VISIBLE
-                tvDate.visibility = View.VISIBLE
-                tvDescription.visibility = View.VISIBLE
-            }
-        }else {
-            binding.apply {
-                consAvatarName.visibility = View.GONE
-                ivImageStory.visibility = View.GONE
-                tvDate.visibility = View.GONE
-                tvDescription.visibility = View.GONE
-            }
-        }
+    private fun setupDetailStory(data: StoryEntity) {
+        val story = data
         Glide.with(this)
             .load(story.photoUrl)
             .centerCrop()
             .into(binding.ivImageStory)
         binding.apply {
-            tvDate.text = story.createdAt
+            tvDate.text = story.createdAt.withDateFormat()
             tvDescription.text = story.description
             tvNameUser.text = story.name
         }

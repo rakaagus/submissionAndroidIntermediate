@@ -11,7 +11,7 @@ fun String.withNumberingFormat(): String {
 }
 
 fun String.withDateFormat(): String {
-    val format = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
     val date = format.parse(this) as Date
     return DateFormat.getDateInstance(DateFormat.FULL).format(date)
 }

@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import com.dicoding.submissionandroidintermediate.R
 import com.dicoding.submissionandroidintermediate.data.Result
 import com.dicoding.submissionandroidintermediate.data.local.entity.StoryEntity
+import com.dicoding.submissionandroidintermediate.data.remote.response.ListStoryItem
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -74,38 +75,30 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         mapsViewModel.getUserSession().observe(this){user->
             mapsViewModel.getAllStoriesWithLocation(user.token).observe(this){result->
-                if (result != null) {
-                    when (result) {
+                if(result != null){
+                    when(result){
                         is Result.Loading -> {
                             showDialog()
                         }
-
                         is Result.Success -> {
                             dismissLoading()
-                            setUpDataMarker(result.data)
+                            result.data.forEach {dataMap->
+                                val latLng = LatLng(dataMap.lat!!, dataMap.lon!!)
+                                mMap.addMarker(
+                                    MarkerOptions()
+                                        .position(latLng)
+                                        .title(dataMap.name)
+                                        .snippet(dataMap.description)
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                                )
+                            }
                         }
-
                         is Result.Error -> {
                             dismissLoading()
-                            Log.d("MapsActivity", "onViewCreated: ${result.error}")
+                            Log.d("MapActivity", "onMapReady: ${result.error}")
                         }
                     }
                 }
-            }
-        }
-    }
-
-    private fun setUpDataMarker(data: List<StoryEntity>) {
-        data.forEach { data->
-            if(data.lat !=null && data.lon !=null){
-                val latLng = LatLng(data.lat!!, data.lon!!)
-                mMap.addMarker(
-                    MarkerOptions()
-                        .position(latLng)
-                        .title(data.name)
-                        .snippet(data.description)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                )
             }
         }
     }

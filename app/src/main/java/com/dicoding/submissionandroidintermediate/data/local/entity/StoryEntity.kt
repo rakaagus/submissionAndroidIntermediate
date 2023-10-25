@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "story")
 data class StoryEntity(
     @PrimaryKey
@@ -29,4 +30,4 @@ data class StoryEntity(
 
     @ColumnInfo(name = "lat")
     var lat: Double?
-)
+) : Parcelable

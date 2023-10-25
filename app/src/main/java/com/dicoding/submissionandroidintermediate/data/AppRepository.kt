@@ -14,8 +14,10 @@ import com.dicoding.submissionandroidintermediate.data.local.entity.User
 import com.dicoding.submissionandroidintermediate.data.local.room.StoryDatabase
 import com.dicoding.submissionandroidintermediate.data.remote.ApiService
 import com.dicoding.submissionandroidintermediate.data.remote.response.DetailStoryResponse
+import com.dicoding.submissionandroidintermediate.data.remote.response.ListStoryItem
 import com.dicoding.submissionandroidintermediate.data.remote.response.LoginResponse
 import com.dicoding.submissionandroidintermediate.data.remote.response.RegisterResponse
+import com.dicoding.submissionandroidintermediate.data.remote.response.StoryResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MediaType.Companion.toMediaType
@@ -79,7 +81,7 @@ class AppRepository(
         @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
-                pageSize = 10
+                pageSize = 30
             ),
             remoteMediator = StoryRemoteMediator(
                 database = database,
@@ -92,39 +94,25 @@ class AppRepository(
         ).liveData
     }
 
-    fun getAllStoryWithLocation(token: String): LiveData<Result<List<StoryEntity>>> = liveData {
+    fun getAllStoryWithLocation(token: String): LiveData<Result<List<ListStoryItem>>> = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.getAllStory(
+            val responseData = apiService.getAllStory(
                 setGenerateToken(token),
                 size = 20,
                 location = 1
             )
-            val error = response.error
+            val error = responseData.error
             if(!error){
-                val listStory = response.listStory
-                val newStory = listStory.map {story->
-                    StoryEntity(
-                        id = story.id,
-                        name = story.name,
-                        description = story.description,
-                        photoUrl = story.photoUrl,
-                        createdAt = story.createdAt,
-                        lon = story.lon,
-                        lat = story.lat
-                    )
-                }
-                database.storyDao().deleteStory()
-                database.storyDao().insertStory(newStory)
+                emit(Result.Success(responseData.listStory))
             }else {
-                emit(Result.Error(response.message))
+                emit(Result.Error(responseData.message))
             }
         }catch (e: Exception){
-            Log.d("AppRepository", "getAllStory: ${e.message.toString()}")
             emit(Result.Error(e.message.toString()))
+            Log.d("AppRepository", "getAllStoryWithLocation: ${e.message.toString()}")
         }
-        val localData: LiveData<Result<List<StoryEntity>>> = database.storyDao().getStoryLocation().map { Result.Success(it) }
-        emitSource(localData)
+
     }
 
     fun uploadStory(token:String, imageFile: File, description: String) = liveData {
@@ -147,28 +135,6 @@ class AppRepository(
             val errorBody = e.response()?.errorBody().toString()
             val errorResponse = Gson().fromJson(errorBody, RegisterResponse::class.java)
             emit(Result.Error(errorResponse.message))
-        }
-    }
-
-    fun getDetailStory(
-        token: String,
-        id: String
-    ): LiveData<Result<DetailStoryResponse>> = liveData {
-        emit(Result.Loading)
-        try {
-            val response = apiService.getDetailStory(
-                setGenerateToken(token),
-                id
-            )
-            val error = response.error
-            if(!error){
-                emit(Result.Success(response))
-            }else {
-                emit(Result.Error(response.message))
-            }
-        }catch (e: Exception){
-            Log.d("AppRepository", "getDetailStory: ${e.message.toString()}")
-            emit(Result.Error(e.message.toString()))
         }
     }
 

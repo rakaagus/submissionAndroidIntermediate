@@ -55,10 +55,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
             setupDataHome()
         }
 
+        setupAdapter()
         setupDataHome()
     }
 
-    private fun setupDataHome() {
+    private fun setupAdapter() {
         storyAdapter = StoryAdapter()
         val layoutManager = LinearLayoutManager(requireActivity())
         val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
@@ -69,45 +70,25 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
         )
 
+        binding.rvStory.layoutManager = layoutManager
+        binding.rvStory.addItemDecoration(itemDecoration)
+
+        storyAdapter.addLoadStateListener { state->
+            binding.swipeRefresh.isRefreshing = state.source.refresh is LoadState.Loading
+        }
+    }
+
+    private fun setupDataHome() {
         homeViewModel.getUserSession().observe(viewLifecycleOwner){user->
             homeViewModel.getAllStory(user.token).observe(viewLifecycleOwner){
                 updateDataStory(it)
             }
         }
-
-        binding.rvStory.layoutManager = layoutManager
-        binding.rvStory.addItemDecoration(itemDecoration)
-
-        storyAdapter.setOnItemClickCallback(object: StoryAdapter.OnClickCallback{
-            override fun onItemClicked(data: StoryEntity) {
-                setDataToDetailStory(data)
-            }
-        })
     }
 
     private fun updateDataStory(it: PagingData<StoryEntity>) {
         storyAdapter.submitData(lifecycle, it)
     }
-
-    private fun setDataToDetailStory(data: StoryEntity) {
-        val intent = Intent(requireActivity(), DetailActivity::class.java)
-        intent.putExtra(DetailActivity.ID_STORY_KEY, data.id)
-        startActivity(intent)
-    }
-
-    private fun dismissLoading() {
-        if(loadingHome.isShowing){
-            loadingHome.dismiss()
-        }
-    }
-
-    private fun showDialog() {
-        loadingHome.setContentView(R.layout.bg_loading_auth)
-        loadingHome.setCancelable(false)
-        loadingHome.setCanceledOnTouchOutside(false)
-        loadingHome.show()
-    }
-
 
     override fun onClick(v: View?) {
 
