@@ -62,7 +62,8 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.1")
     implementation("androidx.activity:activity-ktx:1.7.2")
     implementation("androidx.room:room-runtime:2.6.0-beta01")
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.android.gms:play-services-maps:18.0.0")
+    implementation("com.google.android.gms:play-services-location:18.0.0")
     ksp("androidx.room:room-compiler:2.6.0-beta01")
     implementation("androidx.room:room-ktx:2.5.2")
 

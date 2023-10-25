@@ -91,6 +91,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                         .snippet(dataMap.description)
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                                 )
+                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5f))
                             }
                         }
                         is Result.Error -> {

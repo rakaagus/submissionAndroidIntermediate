@@ -2,36 +2,39 @@ package com.dicoding.submissionandroidintermediate.ui.post
 
 import android.Manifest
 import android.app.Dialog
-import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
 import com.dicoding.submissionandroidintermediate.R
 import com.dicoding.submissionandroidintermediate.data.Result
 import com.dicoding.submissionandroidintermediate.databinding.ActivityAddPostBinding
 import com.dicoding.submissionandroidintermediate.ui.ViewModelFactory
-import com.dicoding.submissionandroidintermediate.ui.auth.login.LoginActivity
 import com.dicoding.submissionandroidintermediate.utils.getImageUri
 import com.dicoding.submissionandroidintermediate.utils.reduceFileImage
 import com.dicoding.submissionandroidintermediate.utils.uriToFile
-import kotlinx.coroutines.launch
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class AddPostActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddPostBinding
-    private var currentImageUri: Uri? = null
     private lateinit var loadingUpload: Dialog
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private var location: Location? = null
+    private var currentImageUri: Uri? = null
     private val addPostViewModel by viewModels<AddPostViewModel> {
         ViewModelFactory.getInstance(application)
     }
@@ -46,6 +49,20 @@ class AddPostActivity : AppCompatActivity() {
                 Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
             }
         }
+
+    private val requestLastLocation = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ){ permissions ->
+        when {
+            permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
+                // Only approximate location access granted.
+                getMyLastLocation()
+            }
+            else -> {
+                // No location access granted.
+            }
+        }
+    }
 
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
@@ -76,16 +93,12 @@ class AddPostActivity : AppCompatActivity() {
         }
     }
 
-    private fun startCamera(){
-        currentImageUri = getImageUri(this)
-        launchIntentCamera.launch(currentImageUri)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         loadingUpload = Dialog(this)
 
         if (!allPermissionsGranted()) {
@@ -124,6 +137,14 @@ class AddPostActivity : AppCompatActivity() {
             }
         }
 
+        binding.switchShareLocation.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            if(isChecked){
+                getMyLastLocation()
+            }else {
+                location = null
+            }
+        }
+
         binding.ivBack.setOnClickListener {
             AlertDialog.Builder(this).apply {
                 setTitle(getString(R.string.text_title_logout))
@@ -143,6 +164,30 @@ class AddPostActivity : AppCompatActivity() {
         binding.btnUpload.setOnClickListener { uploadImage() }
     }
 
+    private fun getMyLastLocation() {
+        if(checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)){
+            fusedLocationClient.lastLocation.addOnSuccessListener {location: Location?->
+                if(location != null){
+                    this.location = location
+                }else {
+                    Toast.makeText(
+                        this@AddPostActivity,
+                        "Location is not found. Try Again",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    binding.switchShareLocation.isChecked = false
+                }
+            }
+        }else {
+            requestLastLocation.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        }
+    }
+
     private fun setEnableButton() {
         val result = binding.edtDescription.text
         Log.d(TAG, "setEnableButton: $currentImageUri $result")
@@ -156,14 +201,27 @@ class AddPostActivity : AppCompatActivity() {
         }
     }
 
+    private fun startCamera(){
+        currentImageUri = getImageUri(this)
+        launchIntentCamera.launch(currentImageUri)
+    }
+
     private fun uploadImage() {
         currentImageUri?.let {uri ->
             val imageFile = uriToFile(uri, this).reduceFileImage()
             Log.d("Image File", "showImage: ${imageFile.path}")
             val desc = binding.edtDescription.text.toString()
 
+            var lat: String? = null
+            var lon: String? = null
+
+            if(location != null){
+                lat = location?.latitude.toString()
+                lon = location?.longitude.toString()
+            }
+
             addPostViewModel.getUserSession().observe(this){ user->
-                addPostViewModel.uploadStory(user.token, imageFile, desc).observe(this){result->
+                addPostViewModel.uploadStory(user.token, imageFile, desc, lat, lon).observe(this){result->
                     if(result != null){
                         when(result){
                             is Result.Loading -> {
@@ -212,6 +270,13 @@ class AddPostActivity : AppCompatActivity() {
         loadingUpload.setCancelable(false)
         loadingUpload.setCanceledOnTouchOutside(false)
         loadingUpload.show()
+    }
+
+    private fun checkPermission(permission: String): Boolean{
+        return ContextCompat.checkSelfPermission(
+            this,
+            permission,
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     companion object{

@@ -22,6 +22,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.HttpException
@@ -115,9 +116,17 @@ class AppRepository(
 
     }
 
-    fun uploadStory(token:String, imageFile: File, description: String) = liveData {
+    fun uploadStory(
+        token:String,
+        imageFile: File,
+        description: String,
+        lat: String? = null,
+        lon: String? = null
+    ) = liveData {
         emit(Result.Loading)
         val requestBody = description.toRequestBody("text/plain".toMediaType())
+        val requestLat = lat?.toRequestBody("text/plain".toMediaType())
+        val requestLon = lon?.toRequestBody("text/plain".toMediaType())
         val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
         val multipartBody = MultipartBody.Part.createFormData(
             "photo",
@@ -126,9 +135,11 @@ class AppRepository(
         )
         try {
             val successResponse = apiService.uploadStory(
-                setGenerateToken(token),
-                multipartBody,
-                requestBody
+                token = setGenerateToken(token),
+                file = multipartBody,
+                description = requestBody,
+                lat = requestLat,
+                lon = requestLon
             )
             emit(Result.Success(successResponse))
         }catch (e: HttpException){
