@@ -2,6 +2,7 @@ package com.dicoding.submissionandroidintermediate.ui.map
 
 import android.app.Dialog
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,8 @@ import com.dicoding.submissionandroidintermediate.databinding.ActivityMapsBindin
 import com.dicoding.submissionandroidintermediate.ui.ViewModelFactory
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.MapStyleOptions
+import kotlin.math.log
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -72,6 +75,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isMapToolbarEnabled = true
 
         getMyLocation()
+        setStyleMap()
 
         mapsViewModel.getUserSession().observe(this){user->
             mapsViewModel.getAllStoriesWithLocation(user.token).observe(this){result->
@@ -101,6 +105,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
                 }
             }
+        }
+    }
+
+    private fun setStyleMap() {
+        try {
+            val success = mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
+            if(!success){
+                Log.e("MapActivity", "Style parsing failed")
+            }
+        }catch (e: Resources.NotFoundException){
+            Log.e("MapActivity", "Can't find style. error: $e")
         }
     }
 
